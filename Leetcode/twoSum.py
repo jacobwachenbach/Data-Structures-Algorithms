@@ -43,6 +43,7 @@ seen = {
 
 
 # O(n^2)
+
 def brute_force():
     # loop through length of array
     for i in range(len(nums)):
@@ -51,6 +52,7 @@ def brute_force():
             # If current index + current + 1 = target
             if nums[i] + nums[k] == target:
                 return [i, k]
+
 
 print(dict_method())
 print(brute_force())
