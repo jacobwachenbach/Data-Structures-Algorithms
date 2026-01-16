@@ -32,24 +32,25 @@ def decode(s):
     arr = []
     i = 0
 
-    while i < len(s): 
+    while i < len(s):
+        # CHANGED: ensure this '#' is actually a length header
+        if s[i] == "#" and i + 1 < len(s) and s[i + 1].isdigit():
+            j = i + 1
 
-        if s[i] == "#":
-            j = i + 1      # ADDED: pointer to read the full length
-
-            while j < len(s) and s[j].isdigit():  # ADDED: supports multi-digit lengths
+            while j < len(s) and s[j].isdigit():
                 j += 1
 
-            length = int(s[i + 1:j])  # CHANGED: read full number, not just one char
-            start = j                 # CHANGED: word starts after the length
+            length = int(s[i + 1:j])
+            start = j
             end = start + length
 
             word = s[start:end]
             arr.append(word)
 
-            i = end           # CHANGED: actually skip past the decoded word
+            i = end
         else:
-            i += 1            
+            i += 1  # CHANGED: safely skip literal characters like '#'
+
     return arr
             
 
